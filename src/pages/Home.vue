@@ -4,7 +4,7 @@ import axios from "axios";
 import { inject } from "vue";
 import CardList from "../components/CardList.vue";
 
-const { cart, addToCart, removeFromCart } = inject("cart");
+const { cart, addToCart } = inject("cart");
 const items = ref([]);
 
 const filters = reactive({
@@ -20,51 +20,6 @@ const onClickAddPlus = (item) => {
   }
 };
 
-const fetchFavorites = async () => {
-  try {
-    const { data: favorites } = await axios.get(`https://604781a0efa572c1.mokky.dev/favorites`)
-
-    items.value = items.value.map((item) => {
-      const favorite = favorites.find((favorite) => favorite.item_id === item.id)
-
-      if (!favorite) {
-        return item
-      }
-
-      return {
-        ...item,
-        isFavorite: true,
-        favoriteId: favorite.id
-      }
-    })
-  } catch (err) {
-    console.log(err)
-  }
-}
-
-
-const addToFavorite = async (item) => {
-  try {
-    if (!item.isFavorite) {
-      const obj = {
-        item_id: item.id,
-        item
-      }
-
-      item.isFavorite = true
-
-      const { data } = await axios.post(`https://c1a609d7f41bac5b.mokky.dev/Favorites`, obj)
-
-      item.favoriteId = data.id
-    } else {
-      item.isFavorite = false
-      await axios.delete(`https://c1a609d7f41bac5b.mokky.dev/Favorites/${item.id}`)
-      item.favoriteId = null
-    }
-  } catch (err) {
-    console.log(err)
-  }
-}
 
 const onChangeSelect = (event) => {
   filters.sortBy = event.target.value;
@@ -112,7 +67,6 @@ const fetchItems = async () => {
       isAdded: false,
     }));
 
-    await fetchFavorites();
   } catch (err) {
     console.log(err);
   }
@@ -152,6 +106,6 @@ watch(filters, fetchItems);
     </div>
   </div>
   <div class="mt-10">
-    <CardList :items="items" @add-to-cart="onClickAddPlus" @add-to-favorite="addToFavorite" />
+    <CardList :items="items" @add-to-cart="onClickAddPlus" />
   </div>
 </template>
