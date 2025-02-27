@@ -20,7 +20,7 @@ defineProps({
     <div v-if="!totalPrice" class="flex h-full items-center">
       <infoBlock
         title="Корзина пустая"
-        description="Добавьте хотя бы одну пару кроссовок, чтобы сделать заказ"
+        description="Добавьте хотя бы один товар, чтобы сделать заказ"
       />
     </div>
 

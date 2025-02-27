@@ -16,7 +16,8 @@ const emit = defineEmits(["openDrawer"]);
       </div>
     </router-link>
 
-    <ul class="flex items-center gap-10">
+    <ul class="flex items-center gap-3">
+      <p>Корзина:</p>
       <li
         @click="() => emit('openDrawer')"
         class="flex items-center cursor-pointer gap-3 text-gray-500 hover:text-black"

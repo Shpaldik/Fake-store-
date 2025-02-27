@@ -97,27 +97,29 @@ watch(filters, fetchItems);
 
 <template>
   <div class="flex flex-col md:flex-row justify-between items-center gap-4">
-    <h2 class="text-3xl font-bold">По категорий:</h2>
-    <div class="flex gap-4 items-center w-full md:w-auto">
+    <h2 class="text-3xl font-bold text-center md:text-left">Все товары:</h2>
+    <div class="w-full md:w-auto flex flex-col md:flex-row gap-4 items-center md:items-center justify-between">
       <select
         @change="onChangeCategorySelect"
-        class="py-2 px-3 border rounded-lg outline-none bg-white shadow-sm focus:ring-2 focus:ring-gray-300"
+        class="py-2 px-3 border rounded-lg outline-none bg-white shadow-sm focus:ring-2 focus:ring-gray-300 w-full md:w-auto"
       >
-      <option value="">Выбрать категорию</option>
-      <option value="electronics">Электроника</option>
-      <option value="women's clothing">Для женщин</option>
-      <option value="men's clothing">Для мужчин</option>
-      <option value="jewelery">Украшения</option>
+        <option value="">Выбрать категорию</option>
+        <option value="electronics">Электроника</option>
+        <option value="women's clothing">Для женщин</option>
+        <option value="men's clothing">Для мужчин</option>
+        <option value="jewelery">Украшения</option>
       </select>
 
       <select
         @change="onChangeSelect"
-        class="py-2 px-3 border rounded-lg outline-none bg-white shadow-sm focus:ring-2 focus:ring-gray-300"
+        class="py-2 px-3 border rounded-lg outline-none bg-white shadow-sm focus:ring-2 focus:ring-gray-300 w-full md:w-auto"
       >
         <option value="title">По названию</option>
         <option value="price">По цене (дешевые)</option>
         <option value="-price">По цене (дорогие)</option>
       </select>
+
+
       <div class="relative w-full md:w-auto">
         <img src="/search.svg" class="absolute left-3 top-2.5 w-5 h-5 opacity-60" />
         <input
@@ -128,7 +130,9 @@ watch(filters, fetchItems);
       </div>
     </div>
   </div>
+
   <div class="mt-10">
     <CardList :items="items" @add-to-cart="onClickAddPlus" />
   </div>
 </template>
+

@@ -25,10 +25,17 @@ onMounted(fetchProduct)
       <h1 class="text-3xl font-bold text-gray-800">{{ product.title }}</h1>
       <p class="text-gray-600 leading-relaxed">{{ product.description }}</p>
       <div class="flex items-center gap-2">
+        <span class="text-gray-500 font-medium">Рейтинг:</span>
+        <div class="flex items-center gap-1">
+          <span class="text-yellow-500 font-semibold">{{ product.rating.rate }}</span>
+          <span class="text-gray-400">({{ product.rating.count }} отзывов)</span>
+        </div>
+      </div>
+      <div class="flex items-center gap-2">
         <span class="text-gray-500 font-medium">Цена:</span>
         <b class="text-lg text-green-600 font-semibold">{{ product.price }} руб.</b>
       </div>
-      <button class="mt-4 bg-green-500 text-white px-6 py-2 rounded-lg hover:bg-green-600 transition">Добавить в корзину</button>
+      <router-link to="/Home"><button class="mt-4 bg-green-500 text-white px-6 py-2 rounded-lg hover:bg-green-600 transition">Вернуться на главную страницу</button></router-link>
     </div>
   </div>
   <div v-else class="flex justify-center items-center h-64">
