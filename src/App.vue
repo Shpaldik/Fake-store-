@@ -4,7 +4,6 @@ import { ref, provide, watch, computed } from 'vue'
 import Header from './components/Header.vue'
 import Drawer from './components/Drawer.vue'
 
-/* Корзина (START) */
 const cart = ref([])
 const drawerOpen = ref(false)
 

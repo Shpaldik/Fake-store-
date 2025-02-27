@@ -9,7 +9,6 @@ defineProps({
   totalPrice: Number,
   vatPrice: Number,
   buttonDisabled: Boolean,
-  imageUrl: String
 });
 </script>
 
@@ -22,7 +21,6 @@ defineProps({
       <infoBlock
         title="Корзина пустая"
         description="Добавьте хотя бы одну пару кроссовок, чтобы сделать заказ"
-        :imageUrl="item.imageUrl"
       />
     </div>
 
@@ -52,6 +50,5 @@ defineProps({
       </div>
     </div>
     </div>
-    
   </div>
 </template>

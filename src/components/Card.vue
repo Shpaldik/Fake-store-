@@ -4,6 +4,7 @@ defineProps({
   title: String,
   imageUrl: String,
   price: Number,
+  category: String,
   isFavorite: Boolean,
   isAdded: Boolean,
   onClickFavorite: Function,
@@ -26,13 +27,17 @@ defineProps({
     <img :src="imageUrl" alt="Sneaker" />
 
     <p class="mt-2">{{ title }}</p>
+    <div class="flex flex-col mt-5">
+      <span class="text-slate-400">Категория:</span>
+      <b> {{ category }}</b>
+    </div>
+
 
     <div class="flex justify-between mt-5">
       <div class="flex flex-col">
         <span class="text-slate-400">Цена:</span>
         <b>{{ price }} руб.</b>
       </div>
-
       <img
         v-if="onClickAdd"
         @click="onClickAdd"

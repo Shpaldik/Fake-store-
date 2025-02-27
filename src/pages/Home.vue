@@ -20,7 +20,6 @@ const onClickAddPlus = (item) => {
   }
 };
 
-// Функция для получения избранных
 const fetchFavorites = async () => {
   try {
     const { data: favorites } = await axios.get(`https://604781a0efa572c1.mokky.dev/favorites`)
@@ -43,7 +42,7 @@ const fetchFavorites = async () => {
   }
 }
 
-// Функция для добавления и удаления из избранного
+
 const addToFavorite = async (item) => {
   try {
     if (!item.isFavorite) {
@@ -59,7 +58,7 @@ const addToFavorite = async (item) => {
       item.favoriteId = data.id
     } else {
       item.isFavorite = false
-      await axios.delete(`https://c1a609d7f41bac5b.mokky.dev/Favorites/${item.favoriteId}`)
+      await axios.delete(`https://c1a609d7f41bac5b.mokky.dev/Favorites/${item.id}`)
       item.favoriteId = null
     }
   } catch (err) {
@@ -84,6 +83,18 @@ const fetchItems = async () => {
       sortedData.sort((a, b) => a.price - b.price);
     } else if (filters.sortBy === "-price") {
       sortedData.sort((a, b) => b.price - a.price);
+    } else if (filters.sortBy === "category") {
+      sortedData.sort((a, b) => {
+        const nameA = a.category.toLowerCase();
+        const nameB = b.category.toLowerCase();
+        if (nameA < nameB) {
+          return -1;
+        }
+        if (nameA > nameB) {
+          return 1;
+        }
+        return 0;
+      });
     } else {
       sortedData.sort((a, b) => a.title.localeCompare(b.title));
     }
@@ -120,7 +131,7 @@ watch(filters, fetchItems);
 
 <template>
   <div class="flex justify-between items-center">
-    <h2 class="text-3xl font-bold mb-8">Все Кроссовки</h2>
+    <h2 class="text-3xl font-bold mb-8">Все товары:</h2>
     <div class="flex gap-4">
       <select
         @change="onChangeSelect"

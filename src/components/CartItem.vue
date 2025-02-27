@@ -5,6 +5,7 @@ defineProps({
   id: Number,
   title: String,
   imageUrl: String,
+  category: String,
   price: Number
 })
 </script>
@@ -15,6 +16,7 @@ defineProps({
 
     <div class="flex flex-col flex-1">
       <p>{{ title }}</p>
+      <p>{{ category }}</p>
 
       <div class="flex justify-between mt-2">
         <b class="flex-1">{{ price }} руб.</b>
