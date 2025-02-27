@@ -84,23 +84,23 @@ watch(filters, fetchItems);
 </script>
 
 <template>
-  <div class="flex justify-between items-center">
-    <h2 class="text-3xl font-bold mb-8">Все товары:</h2>
-    <div class="flex gap-4">
+  <div class="flex flex-col md:flex-row justify-between items-center gap-4">
+    <h2 class="text-3xl font-bold">Все товары</h2>
+    <div class="flex gap-4 items-center w-full md:w-auto">
       <select
         @change="onChangeSelect"
-        class="py-2 px-3 border rounded-md outline-none"
+        class="py-2 px-3 border rounded-lg outline-none bg-white shadow-sm focus:ring-2 focus:ring-gray-300"
       >
         <option value="title">По названию</option>
         <option value="price">По цене (дешевые)</option>
         <option value="-price">По цене (дорогие)</option>
       </select>
-      <div class="relative">
-        <img src="/search.svg" class="absolute left-3 top-2.5" />
+      <div class="relative w-full md:w-auto">
+        <img src="/search.svg" class="absolute left-3 top-2.5 w-5 h-5 opacity-60" />
         <input
           @input="onChangeSearchInput"
           placeholder="Поиск..."
-          class="border rounded-md py-1.5 pl-11 pr-4 outline-none focus:border-gray-400"
+          class="border rounded-lg py-2 pl-10 pr-4 outline-none w-full md:w-64 shadow-sm focus:ring-2 focus:ring-gray-300"
         />
       </div>
     </div>
