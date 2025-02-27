@@ -10,7 +10,9 @@ const items = ref([]);
 const filters = reactive({
   sortBy: "title",
   searchQuery: "",
+  selectedCategory: "", 
 });
+
 
 const onClickAddPlus = (item) => {
   if (!item.isAdded) {
@@ -29,11 +31,26 @@ const onChangeSearchInput = (event) => {
   filters.searchQuery = event.target.value;
 };
 
+const onChangeCategorySelect = (event) => {
+  filters.selectedCategory = event.target.value;
+};
+
+
 const fetchItems = async () => {
   try {
     const { data } = await axios.get("https://fakestoreapi.com/products");
 
     let sortedData = [...data];
+
+
+if (filters.selectedCategory) {
+  sortedData = sortedData.filter(item =>
+    item.category.toLowerCase() === filters.selectedCategory.toLowerCase()
+  );
+}
+
+
+
     if (filters.sortBy === "price") {
       sortedData.sort((a, b) => a.price - b.price);
     } else if (filters.sortBy === "-price") {
@@ -42,13 +59,7 @@ const fetchItems = async () => {
       sortedData.sort((a, b) => {
         const nameA = a.category.toLowerCase();
         const nameB = b.category.toLowerCase();
-        if (nameA < nameB) {
-          return -1;
-        }
-        if (nameA > nameB) {
-          return 1;
-        }
-        return 0;
+        return nameA.localeCompare(nameB);
       });
     } else {
       sortedData.sort((a, b) => a.title.localeCompare(b.title));
@@ -72,6 +83,7 @@ const fetchItems = async () => {
   }
 };
 
+
 onMounted(fetchItems);
 
 watch(cart, () => {
@@ -85,8 +97,19 @@ watch(filters, fetchItems);
 
 <template>
   <div class="flex flex-col md:flex-row justify-between items-center gap-4">
-    <h2 class="text-3xl font-bold">Все товары</h2>
+    <h2 class="text-3xl font-bold">По категорий:</h2>
     <div class="flex gap-4 items-center w-full md:w-auto">
+      <select
+        @change="onChangeCategorySelect"
+        class="py-2 px-3 border rounded-lg outline-none bg-white shadow-sm focus:ring-2 focus:ring-gray-300"
+      >
+      <option value="">Выбрать категорию</option>
+      <option value="electronics">Электроника</option>
+      <option value="women's clothing">Для женщин</option>
+      <option value="men's clothing">Для мужчин</option>
+      <option value="jewelery">Украшения</option>
+      </select>
+
       <select
         @change="onChangeSelect"
         class="py-2 px-3 border rounded-lg outline-none bg-white shadow-sm focus:ring-2 focus:ring-gray-300"
